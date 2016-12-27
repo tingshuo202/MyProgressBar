@@ -1,12 +1,12 @@
 # MyProgressBar包含两个效果：圆形进度条和条形进度条可以自定义进度条的高度和颜色，进度文字的大小和颜色。
 
-![image](https://github.com/tingshuo202/MyProgressBar/blob/master/app/gif/progress.gif) 
+    ![image](https://github.com/tingshuo202/MyProgressBar/blob/master/app/gif/progress.gif) 
 一、条形进度条HorizontalProgressBar
 
     1、自定义属性
           在attrs.xml中定义
             
-<resources>
+    <resources>
     <declare-styleable name="ProgressView">
         <attr name="unreach_color" format="color"/>
         <attr name="unreach_height" format="dimension"/>
@@ -16,10 +16,10 @@
         <attr name="text_size" format="dimension"/>
         <attr name="text_offset" format="dimension"/>
     </declare-styleable>
-</resources>
+    </resources>
 
       在layout中应用
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:shy="http://schemas.android.com/apk/res/com.shy.progressview"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -37,7 +37,7 @@
             android:padding="10dp"
             android:progress="0"/>
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
          
          在view的构造方法中获取
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView);
