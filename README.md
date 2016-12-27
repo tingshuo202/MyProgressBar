@@ -39,17 +39,7 @@
     </LinearLayout>
     </ScrollView>
          
-    在view的构造方法中获取
-      < TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView);
-       mTextSize = (int) ta.getDimension(R.styleable.ProgressView_text_size,mTextSize);
-       mTextColor = ta.getColor(R.styleable.ProgressView_text_color,mTextColor);
-       mReachHeight = (int) ta.getDimension(R.styleable.ProgressView_reach_height,mReachHeight);
-       mReachColor = ta.getColor(R.styleable.ProgressView_reach_color,mReachColor);
-       mUnReachHeight = (int) ta.getDimension(R.styleable.ProgressView_unreach_height,mUnReachHeight);
-       mUnReachColor = ta.getColor(R.styleable.ProgressView_unreach_color,mUnReachColor);
-       mTextOffset = (int) ta.getDimension(R.styleable.ProgressView_text_offset,mTextOffset);>
-       ta.recycle();
-
+    在view的构造方法中获取即可使用自定义属性。
     2、自定义控件继承ProgressBar
         先定义两个公用的方法
      /**
