@@ -6,7 +6,7 @@
     1、自定义属性
           在attrs.xml中定义
             
-*<resources>
+<resources>
     <declare-styleable name="ProgressView">
         <attr name="unreach_color" format="color"/>
         <attr name="unreach_height" format="dimension"/>
@@ -17,9 +17,9 @@
         <attr name="text_offset" format="dimension"/>
     </declare-styleable>
 </resources>
-          在layout中应用
+
+      在layout中应用
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-//添加引用，最后是包名，空间名称shy是自定义的，也可以换成其他的
     xmlns:shy="http://schemas.android.com/apk/res/com.shy.progressview"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -38,7 +38,8 @@
             android:progress="0"/>
     </LinearLayout>
 </ScrollView>
-          在view的构造方法中获取
+         
+         在view的构造方法中获取
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView);
         mTextSize = (int) ta.getDimension(R.styleable.ProgressView_text_size,mTextSize);
         mTextColor = ta.getColor(R.styleable.ProgressView_text_color,mTextColor);
@@ -51,7 +52,7 @@
 
     2、自定义控件继承ProgressBar
         先定义两个公用的方法
-   /**
+     /**
      * dp to px
      * @param dpVal
      * @return
@@ -69,7 +70,7 @@
     }
     在onMeasure()方法中，对高进行测量。一般是宽高都需要测量的，但是横向进度条的宽度一定是精确值才符合逻辑，所以这里只测量了高度。根据mode确定size。
     
-   @Override
+     @Override
     protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //这里没有测量宽度,因为默认困度一定是精确值。
@@ -78,7 +79,7 @@
         setMeasuredDimension(width,height);
         mRealWidth = getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
     }
-  private int measureHeight(int heightMeasureSpec) {
+     private int measureHeight(int heightMeasureSpec) {
         int result = 0;
         int mode = MeasureSpec.getMode(heightMeasureSpec);
         int size = MeasureSpec.getSize(heightMeasureSpec);
@@ -101,7 +102,7 @@
     canvas的save和restore方法，是为了保存画布的状态，在两者之间对画布进行特殊的操作，restore方法之后，又会恢复画布之前的状态。
     @Override
     protected synchronized void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);
+    //        super.onDraw(canvas);
         canvas.save();
         canvas.translate(getPaddingLeft(),dp2px(10));
         //进度条是否已经到达100%
@@ -148,7 +149,7 @@
 
     3、在mainActivity中，使用handler更新进度
     
-   public class MainActivity extends Activity {
+     public class MainActivity extends Activity {
     private HorizontalProgressBar progressView;
     private static int MSG_UPDATE = 0x110;
     private Handler handler = new Handler(){
@@ -171,7 +172,7 @@
         progressView = (HorizontalProgressBar)findViewById(R.id.progress);
         handler.sendEmptyMessage(MSG_UPDATE);
     }
-}*
+    }
 
 
 
