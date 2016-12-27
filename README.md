@@ -6,7 +6,7 @@
     1、自定义属性
           在attrs.xml中定义
             
-<resources>
+*<resources>
     <declare-styleable name="ProgressView">
         <attr name="unreach_color" format="color"/>
         <attr name="unreach_height" format="dimension"/>
@@ -38,8 +38,8 @@
             android:progress="0"/>
     </LinearLayout>
 </ScrollView>
-          在view的构造方法中获取
-        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView);
+          在view的构造方法中获取
+        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView);
         mTextSize = (int) ta.getDimension(R.styleable.ProgressView_text_size,mTextSize);
         mTextColor = ta.getColor(R.styleable.ProgressView_text_color,mTextColor);
         mReachHeight = (int) ta.getDimension(R.styleable.ProgressView_reach_height,mReachHeight);
@@ -148,7 +148,7 @@
 
     3、在mainActivity中，使用handler更新进度
     
-public class MainActivity extends Activity {
+   public class MainActivity extends Activity {
     private HorizontalProgressBar progressView;
     private static int MSG_UPDATE = 0x110;
     private Handler handler = new Handler(){
@@ -171,107 +171,7 @@ public class MainActivity extends Activity {
         progressView = (HorizontalProgressBar)findViewById(R.id.progress);
         handler.sendEmptyMessage(MSG_UPDATE);
     }
-}
-
-二、画圆形进度条
-    1、继承条形进度条的HorizontalProgressBar，这样可以使用之前定义好的自定义属性。
-        再增加一个半径的自定义属性就可以。
-      
-
- 方法解析：
-View.resolveSize(int size,int measureSpec)
-public static int resolveSize(int size, int measureSpec) {
-         int result = size;
-         int specMode = MeasureSpec.getMode(measureSpec);
-         int specSize =  MeasureSpec.getSize(measureSpec);
-         switch (specMode) {
-         case MeasureSpec.UNSPECIFIED:
-             result = size;
-             break;
-         case MeasureSpec.AT_MOST:
-             result = Math.min(size, specSize);
-             break;
-         case MeasureSpec.EXACTLY:
-             result = specSize;
-             break;
-         }
-         return result;
-     }
-
-package com.shy.progressview;
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.util.AttributeSet;
-/**
- * Created by holyca on 16/12/27.
- */
-public class CircleProgressBar extends HorizontalProgressBar {
-//    private static final int RADIUS = 30;
-    private Paint mPaint;
-    private int mPaintWidth;
-    private int mRadius ;
-    public CircleProgressBar(Context context) {
-        this(context,null);
-    }
-    public CircleProgressBar(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
-    }
-    public CircleProgressBar(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.CircleProgressBar);
-        mRadius = (int) ta.getDimension(R.styleable.CircleProgressBar_radius,mRadius);
-        ta.recycle();
-        mPaint = new Paint();
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setAntiAlias(true);
-        mPaint.setDither(true);
-        mPaint.setTextSize(mTextSize);
-    }
-    @Override
-    protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        //进度条的宽度
-        mPaintWidth = Math.max(mUnReachHeight,mReachHeight);
-        int except = getPaddingLeft() + getPaddingRight() + mRadius * 2 + mPaintWidth* 2;
-        //获取宽高
-        int width = resolveSize(except,widthMeasureSpec);
-        int height = resolveSize(except,widthMeasureSpec);
-        int realWidth = Math.min(width,height);
-        mRadius = (realWidth - getPaddingRight() -getPaddingLeft() - mPaintWidth) / 2;
-        setMeasuredDimension(realWidth,realWidth);
-    }
-    @Override
-    protected synchronized void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);//加上这个就会默认再画一个横向的进度条
-        String text = getProgress() + "%";
-//文字的宽度
-        float textWidth = mPaint.measureText(text);
-        //文字高度中间的坐标
-        float textHeight = (mPaint.descent() + mPaint.ascent()) / 2;
-        canvas.save();
-//画布的原点默认是（0，0），translate表示平移。不移动的话,进度条的宽度就会只显示一半       
- canvas.translate(getPaddingLeft() + mPaintWidth/2,getPaddingTop() + mPaintWidth/2);
-  mPaint.setStyle(Paint.Style.STROKE);//空心
-        //unreach circle
-        mPaint.setColor(mUnReachColor);
-        mPaint.setStrokeWidth(mUnReachHeight);
-        canvas.drawCircle(mRadius,mRadius,mRadius,mPaint);
-        //reach
-        mPaint.setColor(mReachColor);
-        mPaint.setStrokeWidth(mReachHeight);
-        float sweep = getProgress() * 1.0f /getMax() * 360;
-        canvas.drawArc(new RectF(0,0,mRadius * 2,mRadius * 2),0,sweep,false,mPaint);
-        //text
-        mPaint.setStyle(Paint.Style.FILL);//实心
-        mPaint.setColor(mTextColor);
-        canvas.drawText(text,mRadius - textWidth/2,mRadius-textHeight,mPaint);
-        canvas.restore();
-    }
-}
-
+}*
 
 
 
