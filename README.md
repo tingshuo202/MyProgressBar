@@ -1,5 +1,6 @@
 # MyProgressBar包含两个效果：圆形进度条和条形进度条可以自定义进度条的高度和颜色，进度文字的大小和颜色。
 
+![image](https://github.com/tingshuo202/MyProgressBar/blob/master/app/gif/progress.gif) 
 一、条形进度条HorizontalProgressBar
 
     1、自定义属性
@@ -38,7 +39,7 @@
     </LinearLayout>
 </ScrollView>
           在view的构造方法中获取
- TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView);
+        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView);
         mTextSize = (int) ta.getDimension(R.styleable.ProgressView_text_size,mTextSize);
         mTextColor = ta.getColor(R.styleable.ProgressView_text_color,mTextColor);
         mReachHeight = (int) ta.getDimension(R.styleable.ProgressView_reach_height,mReachHeight);
