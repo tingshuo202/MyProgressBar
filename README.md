@@ -1,6 +1,6 @@
 # MyProgressBar包含两个效果：圆形进度条和条形进度条可以自定义进度条的高度和颜色，进度文字的大小和颜色。
 
-    ![image](https://github.com/tingshuo202/MyProgressBar/blob/master/app/gif/progress.gif) 
+   ![image](https://github.com/tingshuo202/MyProgressBar/blob/master/app/gif/progress.gif) 
 一、条形进度条HorizontalProgressBar
 
     1、自定义属性
