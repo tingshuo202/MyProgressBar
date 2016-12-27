@@ -39,7 +39,7 @@
     </LinearLayout>
     </ScrollView>
          
-         在view的构造方法中获取
+    在view的构造方法中获取
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.ProgressView);
         mTextSize = (int) ta.getDimension(R.styleable.ProgressView_text_size,mTextSize);
         mTextColor = ta.getColor(R.styleable.ProgressView_text_color,mTextColor);
